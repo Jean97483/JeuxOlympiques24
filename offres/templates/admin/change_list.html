@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+    <div>
+        <h2>Nombre de ventes par type d'offre :</h2>
+        <p>Solo : {{ solo_sales }}</p>
+        <p>Duo : {{ duo_sales }}</p>
+        <p>Familliale : {{ familliale_sales }}</p>
+    </div>
+{{ block.super }}
+{% endblock %}

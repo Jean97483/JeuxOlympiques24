@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Jeux Olympiques de Paris</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/evenement.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">JO 2024</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                <li><a href="{% url 'evenement' %}">Evenements</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'deconnexion' %}">Se déconnecter</a></li>
+                <li class="welcome-message">Bienvenue, {{ user.username }}!</li>
+                {% else %}
+                <li><a href="{% url 'connexion' %}">Se connecter</a></li>
+                <li><a href="{% url 'inscription' %}">S'inscrire</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+        <div class="container">
+            <h2>Les événements</h2>
+
+            <div class="form-group">
+                <label for="sport-select">Choisir un sport</label>
+                <select id="sport-select" class="form-control">
+                    <option value="">Tous les sports</option>
+                    {% for sport in sports %}
+                    <option value="{{ sport.id }}">{{ sport.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        
+
+        <section class="cartes-offres">
+            <div class="row">
+                {% for offre in offres %}
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <!--<div class="carte" data-sport-id="{{ offre.sport.id }}" data-date="{{ offre.date }}">  -->
+                            <img src="{{ offre.image.url }}" class="card-img-top" alt="{{ offre.titre }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ offre.titre }}</h5>
+                                <p class="card-subtitle text-muted">{{ offre.sport.nom }}</p>
+                                <p class="card-text">{{ offre.description }}</p>
+                                <p>Date: {{ offre.date }}</p>
+        
+                                <label for="type-offre-{{ offre.id }}">Choisir un type d'offre :</label>
+                                    <select id="type-offre-{{ offre.id }}" class="form-control mb-2">
+                                        <option value="">Sélectionner une offre</option>
+                                        <option value="Solo">Solo</option>
+                                        <option value="Duo">Duo</option>
+                                        <option value="Familliale">Familliale</option>
+                                    </select>
+                                    <button id="ajouter-au-panier-{{ offre.id }}" class="btn btn-primary" onclick="ajouterAuPanier('{{ offre.id }}', '{{ offre.titre }}', 
+                                    '{{ offre.sport.nom }}', '{{ offre.date }}')">Ajouter au panier</button>
+                            </div>
+                            
+                    </div>
+                </div>  
+            {% endfor %}
+            </div>
+            </div>
+             
+        </section>     
+
+        <section class="panier">
+            <h2>Votre Panier</h2>
+            <ul id="panier-liste">
+                <!-- Les billets du panier sont ajoutés ici dynamiquement -->
+            </ul>
+            <div class="total">Total : <span id="panier-total">0</span>€</div>
+            {% if user.is_authenticated %}
+                <button class="valider" onclick="window.location.href=`{% url 'panier' %}`">Valider la commande</button>
+            {% else %}
+                <button class="valider" onclick="alert('Afin de terminer votre achat, merci de bien vouloir vous connecter !')">Valider la commande</button>
+            {% endif %}                
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Jeux Olympiques. Tous droits réservés.</p>
+    </footer>
+    <script src="{% static 'Javascript/evenement.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

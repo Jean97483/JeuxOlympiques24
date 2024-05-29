@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Jeux Olympiques de Paris</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'CSS/accueil.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">JO 2024</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'accueil' %}">Accueil</a></li>
+                    <li><a href="{% url 'evenement' %}">Evenements</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'deconnexion' %}">Se déconnecter</a></li>
+                    <li class="welcome-message">Bienvenue, {{ user.username }}!</li>
+                    {% else %}
+                    <li><a href="{% url 'connexion' %}">Se connecter</a></li>
+                    <li><a href="{% url 'inscription' %}">S'inscrire</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+    </header>
+    <main>
+        <section id="accueil" class="description">
+            <h1>Bienvenue au Jeux Olympiques 2024</h1>
+            <p> Rejoignez- nous pour célébrer l'esprit sportif à paris</p>
+        </section>
+
+        <section class="JODescription">
+            <p>Les Jeux Olympiques de Paris 2024 est un événement spectaculaire célébrant l'excellence sportive mondiale.
+                Avec de compétitions de classe mondiale, des athlètes de tous les horizons et des festivités vibrantes, ces Jeux promettent d'être un momentt inoubliable. Préparez-vous à vivre des moments d'émotion, de suspense et de joie 
+                alors que nous célébrons ensemble l'esprit olympique.
+            </p>
+        </section>
+
+        <section id="evenements" class="evenement">
+            <h2>Les Evenements</h2>
+            <div id="carouselEvenements" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carte">
+                            <img src="{% static 'images/Athlétisme by freepik.jpg' %}" alt="Athlétisme">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Athlétisme</h3>
+                                <p>L'athlétisme, considéré comme le sport roi des Jeux Olympiques, 
+                                    englobe un ensemble varié de disciplines mettant à l'épreuve la vitesse, l'endurance, la force 
+                                    et la technique des athlètes. Ces événements majeur comprend trois categories principales :
+                                    les courses, les sauts et les lancers.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carte">
+                            <img src="{% static 'images/Natation by freepik.jpg' %}" alt="Athlétisme">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Natation</h3>
+                                <p>La natation olympique est non seulement un spectacle de vitesse et d'agilité, mais 
+                                    elle symbolise également la perfection technique et la persévérance.
+                                    Les épreuves sont suivies avec passion par les spectateurs du monde entier, 
+                                    créant des moments inoubliables dans l'histoire des Jeux Olympiques.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carte">
+                            <img src="{% static 'images/Gymnastique by freepik.jpg' %}" alt="Athlétisme">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Gymnastique</h3>
+                                <p>La gymnastique aux Jeux Olympiques est non seulement un test d'aptitude physique mais aussi une démonstration de beauté et de perfection
+                                    technique. Chaque épreuve attire une attention immense des spectateurs et crée des moments inoubliables, 
+                                    souvent marqués par des performances incroyables et des histoires inspirantes de persévérance et de succès.
+                                </p>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carte">
+                            <img src="{% static 'images/Basket by freepik.jpg' %}" alt="Athlétisme">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Basket</h3>
+                                <p>Le basket-ball aux Jeux Olympiques est souvent le théâtre de moments mémorables et de performances légendaires.
+                                    Des joueurs emblématiques comme Michael Jordan, LeBron James et Diana Taurasi ont tous marqué l'histoire olympique avec leurs exploits extraordinaires
+                                </p>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#carouselEvenements" class="carousel-control-prev" role="button"
+                data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Précédent</span>
+                </a>
+                <a href="#carouselEvenements" class="carousel-control-next" role="button"
+                data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Suivant</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy: 2024 Jeux Olympiques. Tous droits réservés.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'Javascript/accueil.js' %}"></script>
+</body>
+</html>
