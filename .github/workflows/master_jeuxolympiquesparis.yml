@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App
+name: Build and deploy Python app to Azure jeuxolympiqueparis
 
 env:
   AZURE_WEBAPP_NAME: jeuxolympiqueparis  # set this to the name of your Azure Web App
@@ -27,7 +27,7 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv venv
+          python3 -m venv venv
           source venv/bin/activate
       - name: Install dependencies
         run: pip install -r requirements.txt
