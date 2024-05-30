@@ -1,0 +1,33 @@
+app = "JeuxOlympiques"
+
+[build]
+  image = "DockerFile"
+
+[env]
+    DATABASE_URL = "mysql://root:Jesusjetesuis974!@localhost:3306/olympics"
+    SECRET_KEY = 'django-insecure-1!nzbbv0p99mi(0upe@+mtiez!mp^oxxyo#$s#f51y$0hs=6d0'
+    DEBUG = "false"
+
+
+[deploy]
+  release_command = "python manage.py migrate"
+
+[services]
+  [[services.http_checks]]
+    grace_period = "1m"
+    interval = "10s"
+    method = "GET"
+    path = "/"
+    protocol = "http"
+    restart_limit = 0
+    timeout = "2s"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+  
+  [[services.tcp_checks]]
+    grace_period = "1m"
+    interval = "10s"
+    restart_limit = 0
+    timeout = "2s"
