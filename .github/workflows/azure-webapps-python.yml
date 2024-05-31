@@ -1,8 +1,8 @@
-name: Build and deploy Python app to Azure jeuxolympiqueparis 
+name: Build and deploy Python app to Azure Web App
 
 env:
   AZURE_WEBAPP_NAME: jeuxolympiqueparis  # set this to the name of your Azure Web App
-  PYTHON_VERSION: '3.12'              # set this to the Python version to use
+  PYTHON_VERSION: '3.11'              # set this to the Python version to use
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v3.0.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
@@ -28,11 +28,11 @@ jobs:
       - name: Create and start virtual environment
         run: |
           python -m venv venv
-          . venv/bin/activate
-
-      - name: Install dependencies
+          echo "Created virtual environment"
+          ls -l venv
+      - name: Activate virtual environment and install dependencies
         run: |
-          . venv/bin/activate
+          source venv/bin/activate
           pip install -r requirements.txt
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
@@ -44,7 +44,7 @@ jobs:
           path: |
             .
             !venv/
-            
+
   deploy:
     permissions:
       contents: none
@@ -52,7 +52,7 @@ jobs:
     needs: build
     environment:
       name: 'Development'
-      url: ${{ steps.deploy-to-jeuxolympiquesparis.outputs.webapp-url }}
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -61,7 +61,7 @@ jobs:
           name: python-app
           path: .
 
-      - name: 'Deploy to Azure jeuxolympiquesparis'
+      - name: 'Deploy to Azure Web App'
         id: deploy-to-jeuxolympiquesparis
         uses: azure/webapps-deploy@v2
         with:
