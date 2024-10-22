@@ -43,7 +43,7 @@ def evenement(request):
     except Exception as e:
         print(f"Erreur lors de la récupération des évènements : {e}")
         messages.error(request, "Une erreur s'est produite lors du chargement des évènements.")
-        return redirect('accueil')
+        return redirect('evenements')
 
 # Autres vues
 @login_required
