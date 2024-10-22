@@ -120,7 +120,7 @@ def simulate_payment(request):
             #Vider le panier après le paiement
             request.session['panier'] = []
             messages.success(request, "Paiement simulé avec succès ! Merci pour votre achat.")
-            return render(request, 'confirmation.html', {'qr_code_url': user.qr_code.url, 'fanal_key': final_key})
+            return render(request, 'confirmation.html', {'qr_code_url': user.qr_code.url, 'final_key': final_key})
         except Exception as e:
             print(f"Erreur lors de la simulation de paiement : {e}")
             messages.error(request, "Une erreur s'est produite lors de la simulation du paiement.")
@@ -149,12 +149,6 @@ def confirmation_view(request):
     }
     return render(request, 'confirmation.html', context)
     
-@login_required
-def panier_view(request):
-    panier_items = Panier.objects.all()
-    total = sum(item.offre.prix * item.quantite for item in panier_items)
-    return render(request, 'panier.html', {'panier_items': panier_items, 'total': total})
-
 @login_required
 def supprimer_du_panier(request, panier_item_id):
     panier_item = get_object_or_404(Panier, id=panier_item_id, user=request.user)
