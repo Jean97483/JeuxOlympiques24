@@ -11,28 +11,19 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-#Initialise environ
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'v#yr@u$uh2)x47!t%!i##*9c*i4_y3$^6vq5!k3@i9j)0oks+='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = False
 
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = ['BeonelJeanWilly.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -83,11 +74,18 @@ WSGI_APPLICATION = 'JeuxOlympiques.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'BeonelJeanWilly$default',
+        'USER': 'BeonelJeanWilly',
+        'PASSWORD': 'Jesusjetesuis974!',
+        'HOST': 'BeonelJeanWilly.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+    }
 
 }
 
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['https://BeonelJeanWilly.pythonanywhere.com'])
+CSRF_TRUSTED_ORIGINS = ['https://BeonelJeanWilly.pythonanywhere.com']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
