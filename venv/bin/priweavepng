@@ -1,4 +1,4 @@
-#!/Applications/JeuxOlympiques/venv/bin/python3.12
+#!/home/BeonelJeanWilly/JeuxOlympiques24/venv/bin/python3.10
 
 # priweavepng
 # Weave selected channels from input PNG files into
