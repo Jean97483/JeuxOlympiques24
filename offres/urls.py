@@ -6,7 +6,7 @@ from users.views import register_view
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),
-    path('evenement/', views.evenement, name='evenement'),
+    path('evenements/', views.evenement, name='evenements'),
     path('panier/', views.panier_view, name='panier'),
     path('supprimer_du_panier/<int:panier_item_id>/', views.supprimer_du_panier, name='supprimer_du_panier'),
     path('ajouter_au_panier/<int:offre_id>/<int:evenement_id>/', ajouter_au_panier, name='ajouter_au_panier'),
