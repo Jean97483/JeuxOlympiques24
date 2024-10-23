@@ -31,13 +31,20 @@
             <h2>Les événements</h2>
 
             <div class="form-group">
-                <label for="sport-select">Choisir un sport</label>
+            <label for="sport-select">Choisir un sport :</label>
+            <select id="sport-select">
+                <option value="">Sélectionner un sport</option>
+                {% for sport in sports %}
+                <option value="{{ sport.id }}">{{ sport.nom }}</option>
+                {% endfor %}
+            </select>
+                <!-- <label for="sport-select">Choisir un sport</label>
                 <select id="sport-select" class="form-control">
                     <option value="">Tous les sports</option>
                     {% for sport in sports %}
                     <option value="{{ sport.id }}">{{ sport.nom }}</option>
                     {% endfor %}
-                </select>
+                </select> -->
             </div>
         
 
