@@ -146,7 +146,7 @@ ul#panier-liste li {
 }
 
 ul#panier-liste li a {
-    color: red;
+    color: white;
     margin-left: 10px;
     text-decoration: none;
 }
@@ -175,7 +175,7 @@ button.valider {
     margin-top: 1rem;
 }
 
-buttton.valider:hover {
+button.valider:hover {
     background: #45a049;
 }
 
