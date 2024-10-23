@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from users.models import CustomUser
 from offres.models import Offre, Sport, Evenement, Panier
 from django.db.models import Count
-
+from .models import Panier
 
 
 @admin.register(Panier)
@@ -34,3 +34,4 @@ class OffreAdmin(admin.ModelAdmin):
 
 admin.site.register(Sport)
 admin.site.register(Evenement)
+admin.site.register(Panier)
