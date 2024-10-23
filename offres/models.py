@@ -30,7 +30,7 @@ class Offre(models.Model):
     
 
 class Panier(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     offre = models.ForeignKey(Offre, on_delete=models.CASCADE)
     evenement = models.ForeignKey(Evenement, on_delete=models.CASCADE)
     quantite = models.PositiveIntegerField(default=1)
