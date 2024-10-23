@@ -1,6 +1,7 @@
 #offres/models.py
 from django.conf import settings
 from django.db import models
+from django.conf import settings
 
 class Sport(models.Model):
     nom = models.CharField(max_length=100)
@@ -29,6 +30,7 @@ class Offre(models.Model):
     
 
 class Panier(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     offre = models.ForeignKey(Offre, on_delete=models.CASCADE)
     evenement = models.ForeignKey(Evenement, on_delete=models.CASCADE)
     quantite = models.PositiveIntegerField(default=1)
