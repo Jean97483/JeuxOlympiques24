@@ -42,15 +42,20 @@ def evenement(request):
         return render(request, 'evenements.html', context)
     except Exception as e:
         print(f"Erreur lors de la récupération des évènements : {e}")
-        messages.error(request, "Une erreur s'est produite lors du chargement des évènements.")
-        return redirect('accueil')
+        messages.error(request, f"Une erreur s'est produite lors du chargement des évènements.")
+        return render(request, 'evenements.html', {})
 
 # Autres vues
 @login_required
 def panier(request):
-    panier_items = Panier.objects.filter(user=request.user)
-    total = sum(item.offre.prix * item.quantite for item in panier_items)
-    return render(request, 'panier.html', {'panier_item': panier_items, 'total': total})
+    try:
+        panier_items = Panier.objects.filter(user=request.user)
+        total = sum(item.offre.prix * item.quantite for item in panier_items)
+        return render(request, 'panier.html', {'panier_item': panier_items, 'total': total})
+    except Exception as e:
+        print(f"Erreur lors de la récupération du panier : {e}")
+        messages.error(request, "Une erreur s'est produite lors du chargement de votre panier.")
+        return redirect('accueil')
 
 @login_required
 def ajouter_au_panier(request, offre_id, evenement_id):
