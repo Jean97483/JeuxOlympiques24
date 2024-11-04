@@ -13,7 +13,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'accueil' %}">Accueil</a></li>
-                <li><a href="{% url 'evenement' %}">Evenements</a></li>
+                <li><a href="{% url 'evenements' %}">Evenements</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'deconnexion' %}">Se déconnecter</a></li>
                 <li class="welcome-message">Bienvenue, {{ user.username }}!</li>
@@ -33,8 +33,8 @@
     </form>
     <p>Déjà inscrit ? <a href="{% url 'login' %}">Se connecter</a></p>
     </main>
-    
-    
+
+
     <footer>
         <p>&copy: 2024 Jeux Olympiques. Tous droits réservés.</p>
     </footer>
