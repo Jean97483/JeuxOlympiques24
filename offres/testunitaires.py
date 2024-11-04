@@ -11,6 +11,6 @@ class HomePageTests(TestCase):
 
     def test_navigation_links(self):
         """Test si les liens de navigation sont accessibles."""
-        for url_name in ['accueil', 'evenement', 'panier']:
+        for url_name in ['accueil', 'evenements', 'panier']:
             response = self.client.get(reverse(url_name))
             self.assertEqual(response.status_code, 200)
