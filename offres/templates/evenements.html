@@ -26,7 +26,7 @@
         </nav>
     </header>
     <main>
-        
+
         <div class="container">
             <h2>Les événements</h2>
 
@@ -46,7 +46,18 @@
                     {% endfor %}
                 </select> -->
             </div>
-        
+
+        <section class="evenments">
+            <h3>Calendrier des événements</h3>
+            <ul class="evenement">
+                {% for evenement in evenements %}
+                <li>
+                    <span class="event-date">{{ evenement.date|date:"d F Y" }}</span>
+                    - <span class="event-sport">{{ evenement.sport.nom }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
 
         <section class="cartes-offres">
             <div class="row">
@@ -60,7 +71,7 @@
                                 <p class="card-subtitle text-muted">{{ offre.sport.nom }}</p>
                                 <p class="card-text">{{ offre.description }}</p>
                                 <p>Date: {{ offre.date }}</p>
-        
+
                                 <label for="type-offre-{{ offre.id }}">Choisir un type d'offre :</label>
                                     <select id="type-offre-{{ offre.id }}" class="form-control mb-2">
                                         <option value="">Sélectionner une offre</option>
@@ -68,17 +79,18 @@
                                         <option value="Duo">Duo</option>
                                         <option value="Familliale">Familliale</option>
                                     </select>
-                                    <button id="ajouter-au-panier-{{ offre.id }}" class="btn btn-primary" onclick="ajouterAuPanier('{{ offre.id }}', '{{ offre.titre }}', 
+                                    <button id="ajouter-au-panier-{{ offre.id }}" class="btn btn-primary" onclick="ajouterAuPanier('{{ offre.id }}', '{{ offre.titre }}',
                                     '{{ offre.sport.nom }}', '{{ offre.date }}')">Ajouter au panier</button>
                             </div>
-                            
+
                     </div>
-                </div>  
+                </div>
             {% endfor %}
             </div>
             </div>
-             
-        </section>     
+
+        </section>
+
 
         <section class="panier">
             <h2>Votre Panier</h2>
@@ -90,7 +102,7 @@
                 <button class="valider" onclick="window.location.href=`{% url 'panier' %}`">Valider la commande</button>
             {% else %}
                 <button class="valider" onclick="alert('Afin de terminer votre achat, merci de bien vouloir vous connecter !')">Valider la commande</button>
-            {% endif %}                
+            {% endif %}
         </section>
     </main>
     <footer>

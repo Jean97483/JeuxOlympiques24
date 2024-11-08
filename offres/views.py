@@ -35,9 +35,11 @@ def evenement(request):
     try:
         sports = Sport.objects.all()
         offres = Offre.objects.all()
+        evenements = Evenement.objects.all()
         context = {
             'sports': sports,
             'offres': offres,
+            'evenements': evenements,
         }
         return render(request, 'evenements.html', context)
     except Exception as e:
@@ -62,8 +64,8 @@ def ajouter_au_panier(request, offre_id, evenement_id):
     offre = get_object_or_404(Offre, id=offre_id)
     evenement = get_object_or_404(Evenement, id=evenement_id)
     panier_item, created = Panier.objects.get_or_create(
-        user=request.user, 
-        offre=offre, 
+        user=request.user,
+        offre=offre,
         evenement=evenement)
     if not created:
         panier_item.quantite += 1
@@ -100,7 +102,7 @@ def simulate_payment(request):
             #Covertir en image utilisable par django
             qr_image = InMemoryUploadedFile(buffer, None, 'qr_code.png', 'image/png', buffer.getbuffer().nbytes, None)
 
-            #Enregistrer le qrcode dans le profil utilisateur 
+            #Enregistrer le qrcode dans le profil utilisateur
             user.qr_code.save('qr_code.png', qr_image)
             user.purchase_key = purchase_key
             user.final_key = final_key
@@ -121,9 +123,9 @@ def simulate_payment(request):
                     messages.error(request, f"L'offre avec ID {item['offre_id']} n'existe pas.")
                 except Evenement.DoesNotExist:
                     messages.error(request, f"L'évènement avec ID {item['evenement_id']} n'existe pas.")
-            
+
             #Vider le panier après le paiement
-            request.session['panier'] = []
+            Panier.objects.filter(user=request.user).delete()
             messages.success(request, "Paiement simulé avec succès ! Merci pour votre achat.")
             return render(request, 'confirmation.html', {'qr_code_url': user.qr_code.url, 'final_key': final_key})
         except Exception as e:
@@ -131,7 +133,7 @@ def simulate_payment(request):
             messages.error(request, "Une erreur s'est produite lors de la simulation du paiement.")
             return redirect('panier')
     return redirect('panier')
-    
+
 @login_required
 def confirmation_view(request):
     user = request.user
@@ -149,11 +151,11 @@ def confirmation_view(request):
         'final_key': user.final_key,
         'user': user,
         'first_name': user.first_name,
-        'last_name': user.last_name, 
-        'qr_code_url': user.qr_code.url    
+        'last_name': user.last_name,
+        'qr_code_url': user.qr_code.url
     }
     return render(request, 'confirmation.html', context)
-    
+
 @login_required
 def supprimer_du_panier(request, panier_item_id):
     panier_item = get_object_or_404(Panier, id=panier_item_id, user=request.user)

@@ -29,21 +29,21 @@
             <h2>Votre Panier</h2>
             <ul id="panier-liste">
                 <!--Les billets du panier sont ajoutés ici dynamiquement-->
-                {% for item in panier_items %}
-                <li>{{ item.offre.titre }} - {{ item.evenement.date }} - {{ item.evenement.date }} - {{ item.quantite }} - {{ item.type_offre }} billet(s) - {{ item.offre.prix }} €
+                {% for item in panier_item %}
+                <li>{{ item.offre.titre }} - {{ item.evenement.date }} - {{ item.evenement.date }} - {{ item.quantite }} - {{ item.type_offre }} billet(s) - {{ item.offre.prix|floatformat:2 }} €
                     <a href="{% url 'supprimer_du_panier' item.id %}">Supprimer</a>
                 </li>
                 {% endfor %}
             </ul>
-            <div class="total">Total : <span id="panier-total">{{ total }}</span> € </div>
-            
+            <div class="total">Total : <span id="panier-total">{{ total|floatformat:2 }}</span> € </div>
+
             <form id="payment_form" action="{% url 'simulate_payment' %}" method="post">
                 {% csrf_token %}
                 <button class="valider" type="submit" onclick="simulerPaiement()">Procéder au paiement</button>
             </form>
-            
+
         </section>
-        
+
     </main>
     <footer>
         <p>&copy: 2024 Jeux Olympiques. Tous droits réservés.</p>
@@ -55,7 +55,7 @@
             billets.forEach(function(billet) {
                 var li = document.createElement('li');
                 li.textContent = billet.offreTitre + ' - ' + billet.sportNom + ' - ' + billet.date + ' - ' + billet.typeOffre + ' - ' + billet.offrePrix + ' €';
-                
+
                 var removeButton = document.createElement('a');
                 removeButton.textContent = 'Supprimer';
                 removeButton.href = '#';
@@ -67,9 +67,9 @@
                 panierList.appendChild(li);
             });
             updateTotal();
-                
+
             });
-        
+
         function updateTotal() {
         var total = 0;
         var panierList = document.getElementById('panier-liste');
@@ -86,7 +86,7 @@
             //Simulation du paiement
             alert('Paiement simulé avec succès ! Merci pour votre achat !');
             localStorage.removeItem('panier');
-            document.getElementById('payment-form').submit();
+            document.getElementById('payment_form').submit();
         }
     </script>
     <script src="{% static 'Javascript/panier.js' %}"></script>

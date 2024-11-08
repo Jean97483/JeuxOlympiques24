@@ -36,6 +36,38 @@ main {
     padding: 20px;
 }
 
+/* Section Calendrier */
+.evenements {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.evenements h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.evenement {
+    list-style: none;
+    padding: 0;
+}
+
+.evenement li {
+    padding: 5px 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.event-date {
+    font-weight: bold;
+}
+
+.event-sport {
+    color: #555;
+}
+
 .cartes-offres h2{
     margin-bottom: 20px;
     text-align: center;
